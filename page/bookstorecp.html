@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            background-color: white;
+        }
+
+        #top {
+            font-size: normal;
+            color: black;
+            background-color: aliceblue;
+
+
+        }
+
+        a {
+            color: black;
+            TEXT-DECORATION: none;
+
+        }
+
+        a:hover {
+            background: #f29901;
+
+        }
+
+        #search {
+            block-size: 33px;
+            width: 40%;
+            background: white;
+            font-size: medium;
+        }
+
+        #searchbutton {
+            height: 36px;
+            font-weight: 110;
+        }
+    </style>
+</head>
+
+<body>
+    <!--页面-->
+    <div>
+        <!--上边框-->
+        <div id="top">
+            <!--顶部-->
+            <table width="100%">
+                <tr>
+                    <td width="79%" style="background-color:aliceblue;">
+                        欢迎光临本书城&nbsp;&nbsp;&nbsp;祝您购物愉快！
+                    </td>
+                    <td style="background-color: aliceblue;">
+                        <a style="background-color: aliceblue;" href="#"><img src="../image/购物车空.png" width="16px"
+                                height="16px">购物车</a>|
+                        <a style="background-color:aliceblue" href="#">帮助中心</a>|
+                        <a style="background-color: aliceblue;" href="myuser.html">新用户注册</a>|
+                        <a style="background-color:aliceblue" href="#">我的账户<img src="../image/账户头像.png " width="16px"
+                                height="17px"></a>
+                    </td>
+                </tr>
+            </table>
+            <!--搜索-->
+            <table width="100%" style="border-collapse:separate; border-spacing:0px 40px;background-color:azure">
+
+                <tr>
+                    <td width="30%" style="background-color: azure">
+
+                    </td>
+                    <td width="50%" style="background-color:azure;">
+                        <input type="text" id="search" />
+                        <input type="button" value="搜索" id="searchbutton" />
+                    </td>
+
+                </tr>
+            </table>
+            <!--目录-->
+            <table width="100%" style="border-collapse:separate; border-spacing:0px 3px;background-color:bisque">
+                <tr align="center">
+                    <td>
+                        <a href="#">图书首页</a>
+                    </td>
+                    <td>
+                        |
+                    <td>
+                        <a href="#">人文社科</a>
+                    </td>
+                    <td>
+                        |
+                    <td>
+                    <td>
+                        <a href="#">生活日常</a>
+                    </td>
+                    <td>
+                        |
+                    <td>
+                    <td>
+                        <a href="#">工程技术</a>
+                    </td>
+                    <td>
+                        |
+                    <td>
+                    <td>
+                        <a href="#">农业科学</a>
+
+                    </td>
+                    <td>
+                        |
+                    <td>
+                    <td>
+                        <a href="#">电子图书</a>
+
+                    </td>
+                    <td>
+                        |
+                    <td>
+                    <td>
+                        <a href="#">文娱商城</a>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div style="width:100%;height:100%;">
+        <div style="position:fixed;margin-top:25%;float:right;">
+            <!--导航栏-->
+            <button style="width:48px;height:48px;background:url('../image/回到顶部\ .svg');border-style:none;" id="btn"></button>
+            <table width="48px" height="48px" style="display:flex; border:2px black solid;">
+                <tr>
+                    <td>回到顶部</td>
+                </tr>
+
+            </table>
+            <script>
+                window.onload = function () {
+                    var btn = document.getElementById("btn"); 
+
+                    var timer = null; 
+
+                    var istop = true; 
+
+                    window.onscroll = function () { 
+
+                        if (!istop) 
+                        { 
+                            clearInterval(timer);
+                        }
+                        istop = false;
+                    }
+
+                    btn.onclick = function () {
+                        //按钮点击事件
+                        timer = setInterval(function () { 
+
+                            var dtop = document.documentElement.scrollTop; 
+
+                            var speed = Math.floor(-dtop / 5); 
+
+                            document.documentElement.scrollTop = dtop + speed; 
+                            istop = true; 
+
+                            if (dtop == 0) { 
+                                clearInterval(timer);
+                            }
+
+                        }, 30)
+                    }
+                }
+            </script>
+        </div>
+        <div
+            style="width:80%;height:800px;background-color:aliceblue;margin-top:2%;display:block;margin-left:10%;margin-right:10%;">
+            <!--主体-->
+            <table width="100%" cellspacing="1" style="display:inline;margin-top:2%;">
+                <tr align="center">
+                    <td style="border:gray 3px solid;">
+                        <center><a href="#"><img src="../image/c++.png" width="60%"></a>
+                            <center>25.00元</center>
+                        </center>
+                    </td>
+                    <td style="border:gray 3px solid;">
+                        <center><a href="#" target="blank"><img src="../image/c++.png" width="60%"></a>
+                            <center>65.00元</center>
+                        </center>
+                    </td>
+                    <td style="border:gray 3px solid;">
+                        <center><a href="#" target="blank"><img src="../image/Linux.png" width="60%"></a>
+                            <center>65.00元</center>
+                        </center>
+                    </td>
+                    <td style="border:gray 3px solid;">
+                        <center><a href="#" target="blank"><img src="../image/java核心卷1.jpg" width="60%"></a>
+                            <center>110.00元</center>
+                        </center>
+                    </td>
+                    <td style="border:gray 3px solid;">
+                        <center><a href="#" target="blank"><img src="../image/HTML.jpg" width="60%" onclick=""></a>
+                            <center>80.00元</center>
+                        </center>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td style="border:gray 3px solid;">
+                        <center><a href="#" target="blank"><img src="../image/战争与和平 50.jpg" width="60%" onclick=""></a>
+                            <center>20.00元</center>
+                        </center>
+                    </td>
+                    <td style="border:gray 3px solid;">
+                        <center><img src="../image/HTML(已去底).jpg" width="60%">
+                            <center></center>
+                        </center>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

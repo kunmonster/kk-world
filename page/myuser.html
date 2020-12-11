@@ -1,0 +1,233 @@
+<!--注册页面-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    form {
+        text-align: center;
+    }
+
+    #userandpwd {
+        margin-left: 0px;
+    }
+
+  
+    #strengthLv0 {
+        height: 6px;
+        width: 120px;
+        position: relative;
+        border: 1px solid #ccc;
+        padding: 2%;
+        margin-left: 20%;
+
+    }
+
+    .strengthLv1 {
+        background: red;
+        position: relative;
+        height: 6px;
+        width: 40px;
+        border: 1px solid #ccc;
+        padding: 2px;
+        margin-left: 46%;
+
+    }
+
+    .strengthLv2 {
+        background: orange;
+        position: relative;
+        height: 6px;
+        width: 80px;
+        border: 1px solid #ccc;
+        padding: 2px;
+        margin-left: 46%;
+    }
+
+    .strengthLv3 {
+        background: green;
+        position: relative;
+        height: 6px;
+        width: 120px;
+        border: 1px solid #ccc;
+        padding: 2px;
+        margin-left: 46%;
+    }
+</style>
+
+<body>
+    <form method="POST" name="user1">
+        <fieldset>
+            <legend style="text-align: center;">
+                注册
+            </legend>
+            <fieldset style="text-align: center;">
+                <legend>
+                    <p style="color:brown;">以下内容请认真填写！</p>
+                </legend>
+                <div id="userandpwd">
+                    <!--用户输入用户名和密码-->
+                    <!--用户名-->
+                    <label for="username">账户:</label>
+                    <input type="text" name="username" id="username" minlength="6" placeholder="请输入用户名" onkeyup="right()" required autofocus />
+                    <img id="iscorrect" />
+                    <script>
+                        function checkusername() {
+                            var m = document.getElementById("username");
+                            var username1 = m.value;
+                            var pattern = /^(\w|[0-9]){6,}$/;
+
+                            return pattern.test(username1);
+                        }
+
+                        function right() {
+                            if (checkusername()) {
+                                var iscorrect = document.getElementById("iscorrect");
+                                iscorrect.src = "../image/正确.png"
+                                iscorrect.style.width = "15px";
+                                iscorrect.style.height = "16px";
+                                iscorrect.style.marginLeft = "2px";
+
+
+                            } else {
+                                var iscorrect = document.getElementById("iscorrect");
+                                iscorrect.src = "../image/错误.png"
+                                iscorrect.style.width = "15px";
+                                iscorrect.style.height = "16px";
+
+                                iscorrect.style.justifyContent = "center";
+                                iscorrect.style.alignItems = "centet";
+                            }
+                        }
+                    </script>
+                </div>
+                <div style="color: red;">(用户名必须由英文或数字组成，且不少于6位)</div>
+                <div >
+                    <label for="password">密码:</label>
+                    <input type="password" name="password" id="pwd" placeholder="请输入密码" minlength="8"
+                        title="请输入含英文字母及数字的8位及以上密码" required autofocus />
+                    <div id="strengthLevel" class="strengthLv0"></div>
+                    <script>
+                        //获取文本框注册键盘抬起事件
+                        document.getElementById("pwd").onkeyup = function (ev) {
+                            document.getElementById("strengthLevel").className = "strengthLv" + (this.value
+                                .length >= 6 ? getLvl(this.value) : 0);
+                        };
+                        //给我密码,我返回对应的级别
+                        function getLvl(a) {
+                            var lvl = 0; //默认是零级
+                            if (/[0-9]/.test(a)) {
+                                lvl++;
+                            }
+                            if (/[a-zA-Z]/.test(a)) {
+                                lvl++;
+                            }
+                            if (/[^a-zA-Z0-9_]/.test(a)) {
+                                lvl++;
+                            }
+                            return lvl; //最小是1 最大是3
+                        }
+                    </script>
+                </div>
+                <div>
+                    <p style="content: left;">
+                        <label for="password1">确认:</label>
+                        <input type="password" name="password1" id="pwd1" placeholder="请再次输入密码" onkeyup="compare()"
+                            title="请再次输入密码以确认" required autofocus /> <img id="compare1">
+                        <script>
+                            function compare() {
+                                var pwd_1 = document.getElementById("pwd").value;
+                                var pwd_2 = document.getElementById("pwd1").value;
+
+                                if (pwd_1 != pwd_2) {
+                                    var m = document.getElementById("compare1");
+                                    m.src = "../image/错误.png";
+                                    m.style.width = "15px";
+                                    m.style.height = "16px";
+                                } else {
+                                    var m = document.getElementById("username");
+                                    var username1 = m.value;
+                                    var m = document.getElementById("compare1");
+                                    localStorage.setItem(username1,pwd_1);              //利用cookis实现账户和密码的存储
+                                    m.src = "../image/正确.png";
+                                    m.style.width = "15px";
+                                    m.style.height = "16px";
+                                }
+
+                            }
+                        </script>
+
+                </div>
+                <div>
+                    <label for="province">省份:</label>
+                    <select size="1" name="province">
+                        <option>北京市</option>
+                        <option>天津市</option>
+                        <option>河北省</option>
+                        <option>山西省</option>
+                        <option>内蒙古自治区</option>
+                        <option>辽宁省</option>
+                        <option>吉林省</option>
+                        <option>黑龙江省</option>
+                        <option>上海市</option>
+                        <option>江苏省</option>
+                        <option>浙江省</option>
+                        <option>安徽省</option>
+                        <option>福建省</option>
+                        <option>江西省</option>
+                        <option>山东省</option>
+                        <option>河南省</option>
+                        <option>湖北省</option>
+                        <option>湖南省</option>
+                        <option>广东省</option>
+                        <option>广西壮族自治区</option>
+                        <option>海南省</option>
+                        <option>重庆市</option>
+                        <option>四川省</option>
+                        <option>贵州省</option>
+                        <option>云南省</option>
+                        <option>西藏自治区</option>
+                        <option>陕西省</option>
+                        <option>甘肃省</option>
+                        <option>青海省</option>
+                        <option>宁夏回族自治区</option>
+                        <option>新疆维吾尔自治区</option>
+                        <option>台湾县</option>
+                        <option>香港特别行政区</option>
+                        <option>澳门特别行政区</option>
+                    </select>
+                    <p>
+                        <label for="address">
+                            详细地址:
+                        </label>
+                        <input type="text" required autofocus placeholder="请输入您的收货地址" id="address" name="address">
+                    </p>
+                </div>
+                    <label for="phnumber">电话号码:</label>
+                    <input type="tel" id="phnumber"  minlength="11" maxlength="11" required> 
+                </div>
+
+                <div style="padding-top:3%;">
+                    <input type="submit" name="submit" id="submit1" onclick="view()"/>
+                    <script>
+                        function view(){
+                             //if((getElementById("address").value!=null)&&(getElementById("pwd1").value!=null)&&(getElementById("pwd").value!=null)&&(getElementById("username").value!=null)){ -->
+                                alert("注册成功");
+                            //}
+                            
+                        }
+                    </script>
+                </div>
+
+            </fieldset>
+
+        </fieldset>
+
+    </form>
+</body>
+
+</html>
