@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>buycar</title>
+</head>
+
+<body>
+    <div style="position:absolute;width: 70%;margin-left:15%">
+        <div style="margin-top: 2%;font-size:xx-large;font-weight:900;margin-left:15px;">
+            购物车
+        </div>
+        <div style="margin-top: 4%;">
+            <li
+                style="list-style-type:none;height:16px;float:left;font-size:x-large;font-weight:bold;line-height: 1.1;text-align:center;">
+                <a href="#" style="TEXT-DECORATION:none;"><em
+                        style="font-style: normal;color:red;margin-right:20px;padding-left:15px;">全部商品</em></a>
+                <span style="display:inline-block;width:2px;height:18px;background:gray;margin-right:20px"></span>
+                <a href="bookStore.html" style="TEXT-DECORATION:none;">特价商品</a>
+            </li>
+        </div>
+        <br />
+        <hr style="height:2px;margin-top:1%;background:gray;">
+        <div>
+            <li style="list-style-type:none;margin-left:15px;display:inline-block;width:100%">
+                <span><input type="checkbox">全选<span>
+                        <span style="padding: 20%;">商品信息</span>
+                        <span style="padding-right:10%;">单价</span>
+                        <span style="padding-right: 10%;">数量</span>
+                        <span>金额</span>
+            </li>
+        </div>
+        <form>
+        <div style="margin-top: 5%;display:flex;" id="maincar">
+            <!--购物车-->
+            <div style="margin-left:40%;text-align:center;" id="kong">
+                <p style="font-size:xx-large;text-align:center;">您的购物车为空!</p>
+                <a href="../page/bookstorecp.html" style="TEXT-DECORATION:none;font-size:large;color:blue">马上选购!</a>
+            </div>
+            <div id="books" style="display:inline;" id = "main">
+            </div>
+            <script>
+                window.onload = function () {
+                    var kong = document.getElementById("kong");
+                    var books = document.getElementById("books");
+                    if ((sessionStorage["sum"] == 0) || (sessionStorage.getItem("sum") == null)) {
+                        kong.style.display = "block";
+                        books.style.display = "none";
+                    } else {
+                        kong.style.display = "none";
+                        books.style.display = "inline";
+                        
+                        var i;
+                        var button[]
+                        for (i = 0; i < sessionStorage.length; i++) {
+                            if(sessionStorage.key(i) == "sum"){
+                                continue;
+                            }
+                        
+                            
+                            var name = sessionStorage.key(i);
+                            var price = localStorage[name];
+                            var number = sessionStorage[name];
+                            var all = price * number;
+
+
+                            var box = document.createElement("li");
+                            box.style.listStyleType = "none";
+                            
+
+
+                            //创建单选框
+                            var span1 = document.createElement("span"); 
+                            span1.style.position = "absolute";
+                            span1.style.marginRight = "20%";
+                            span1.style.marginTop = "6%";
+                            span1.style.width = "10px";
+                            span1.style.marginLeft = "15px";
+                            var input = document.createElement("input");
+                            input.type = "checkbox";
+                            span1.appendChild(input);
+
+                            //创建图片信息
+                            var span2 = document.createElement("span");
+                            var img = document.createElement("img"); 
+                            
+                            var address = "../image/"+name+".jpg"
+                            img.src = address;
+                            img.style.width="30%"
+                            span2.appendChild(img);
+                            span2.style.marginLeft = "13%";
+                            span2.style.marginTop = "10%";
+
+                            //加入书名信息
+                            var span3 = document.createElement("span");
+                            span3.style.position = "absolute";
+                            span3.style.marginTop = "6%";
+                            span3.style.marginLeft = "8%";
+                            span3.innerHTML=name;
+
+                            //单价
+                            var span4 = document.createElement("span");
+                            span4.style.position = "absolute";
+                            span4.style.marginLeft = "36%";
+                            span4.style.marginTop = "6%";
+                            span4.innerHTML = price;
+
+
+                            //数量
+                            
+                            var bt1 = document.createElement("button");
+                            var bt2 = document.createElement("button");
+                            bt1.id=name;
+                            bt2.id=name;     
+
+                            var inputnum = document.createElement("input");
+
+                            
+
+                            var Num = inputnum.value;
+
+                            if(number != Num){
+                                number=Num;
+                            }
+
+                            bt1.style.textAlign="center";
+                            bt2.style.textAlign="center";
+                            
+
+                            bt1.textContent="-";
+                            bt2.textContent="+";
+                            
+                            inputnum.type="text";
+                            inputnum.style.width="14px";
+                            inputnum.value = sessionStorage[name];
+
+                          
+                            
+                            
+                            var span5 = document.createElement("span");
+                            span5.style.position = "absolute";
+                            span5.style.marginTop = "6%";
+                            
+                            span5.style.marginLeft = "48%";
+                            span5.appendChild(bt1);
+                            span5.appendChild(inputnum);
+                            span5.appendChild(bt2);
+
+
+                            var span6 = document.createElement("span");
+                            span6.style.position = "absolute";
+                            span6.style.marginLeft = "64%";
+                            span6.style.marginTop = "6%";
+                            span6.innerHTML = all;
+
+                            var span7 = document.createElement("span");
+                            
+                            box.appendChild(span1);
+                            box.appendChild(span2);
+                            box.appendChild(span3);
+                            box.appendChild(span4);
+                            box.appendChild(span5);
+                            box.appendChild(span6);
+                            books.appendChild(box);
+                        }
+                       
+                        bt1.onclick=function(Element){
+                            var key = String(Element.id);
+                            sessionStorage.key--;
+                            inputnum.value = sessionStorage[key];
+                        }
+
+                        bt2.onclick=function(Element){
+                            var key = String(Element.id);
+                            sessionStorage.key++;
+                            inputnum.value = sessionStorage[key];
+                        }
+                    
+                    }
+                }
+            </script>
+        </div>
+    </form>
+    </div>
+</body>
+
+</html>
