@@ -45,18 +45,44 @@
     </style>
     <script>
         
-        function add(Element) {
-            sessionStorage["sum"]++;
-            var key = String(Element.id);
-            if (sessionStorage.getItem(key) == null) {
-                sessionStorage.setItem(key, 1);
-            }
-             else {
-                sessionStorage[key]++;
-            }
-            
-        }
+        function IsEmpty(){
+        if (localStorage.getItem("sum") == null) {
 
+            localStorage["sum"] = 0;
+            var sumValue =0;
+            for (var i = 0; i < localStorage.length; i++) {
+                if(localStorage.key(i) != "sum")
+                
+                sumValue+=Number(localStorage[localStorage.key(i)]);
+               
+            }
+            localStorage["sum"]=sumValue;
+        } 
+        else {
+            var sumValue =0;
+            for (var i = 0; i < localStorage.length; i++) {
+                if(localStorage.key(i) != "sum")
+                
+                sumValue+=Number(localStorage[localStorage.key(i)]);  
+            }
+            if(Number(localStorage["sum"])!=sumValue){
+                localStorage["sum"]=sumValue;
+            }
+           
+        }
+    }
+    
+        function add(Element) {
+            var key = String(Element.id);
+            if (localStorage.getItem(key) == null) {
+                localStorage.setItem(key, 1);
+            } else {
+                localStorage[key]++;
+            }
+            localStorage.sum++;
+            //使用循环得到所有的书的总数
+
+        }
     </script>
 </head>
 
@@ -72,12 +98,12 @@
                         欢迎光临本书城&nbsp;&nbsp;&nbsp;祝您购物愉快！
                     </td>
                     <td style="background-color: aliceblue;">
-                        <a style="background-color: aliceblue;" href="../page/buycar.html"><img src="../image/购物车空.png" width="16px"
-                                height="16px">购物车</a>|
+                        <a style="background-color: aliceblue;" href="../page/bucar1.1.html"><img
+                                src="../image/购物车空.png" width="16px" height="16px">购物车</a>|
                         <a style="background-color:aliceblue" href="#">帮助中心</a>|
                         <a style="background-color: aliceblue;" href="myuser.html">新用户注册</a>|
-                        <a style="background-color:aliceblue" href="../page/login.html">我的账户<img src="../image/账户头像.png " width="16px"
-                                height="17px"></a>
+                        <a style="background-color:aliceblue" href="../page/login.html">我的账户<img
+                                src="../image/账户头像.png " width="16px" height="17px"></a>
                     </td>
                 </tr>
             </table>
@@ -156,6 +182,7 @@
             </table>
             <script>
                 window.onload = function () {
+                    IsEmpty();
                     var btn = document.getElementById("btn");
 
                     var timer = null;
@@ -205,9 +232,9 @@
                         <center>25.00元</center>
                         <center><button style="color: gray;height:auto;font-weight:400;" onclick="add(this)"
                                 id="c++ Primer plus">加入购物车</button></center>
-                                <script>
-                                    localStorage.setItem("c++ Primer plus",25.00);
-                                </script>
+                        <script>
+                            sessionStorage.setItem("c++ Primer plus", 25.00);
+                        </script>
                     </center>
                 </td>
                 <td style="border:gray 1px solid;width:10%;">
@@ -216,9 +243,9 @@
                         <center>65.00元</center>
                         <center><button style="color: gray;height:auto;font-weight:400;" onclick="add(this)"
                                 id="Linux">加入购物车</button></center>
-                                <script>
-                                    localStorage.setItem("Linux",65.00);
-                                </script>
+                        <script>
+                            sessionStorage.setItem("Linux", 65.00);
+                        </script>
                     </center>
                 </td>
                 <td style="border:gray 1px solid;width:10%;">
@@ -227,9 +254,9 @@
                         <center>110.00元</center>
                         <center><button style="color: gray;height:auto;font-weight:400;" onclick="add(this)"
                                 id="java核心卷1">加入购物车</button></center>
-                                <script>
-                                    localStorage.setItem("java核心卷1",110.00);
-                                </script>
+                        <script>
+                            sessionStorage.setItem("java核心卷1", 110.00);
+                        </script>
                     </center>
                 </td>
                 <td style="border:gray 1px solid;width:10%;">
@@ -239,9 +266,9 @@
                         <center>80.00元</center>
                         <center><button style="color: gray;height:auto;font-weight:400;" onclick="add(this)"
                                 id="HTML">加入购物车</button></center>
-                                <script>
-                                    localStorage.setItem("HTML",80.00);
-                                </script>
+                        <script>
+                            sessionStorage.setItem("HTML", 80.00);
+                        </script>
                     </center>
                 </td>
 
@@ -253,9 +280,9 @@
                         <center>20.00元</center>
                         <center><button style="color: gray;height:auto;font-weight:400;" onclick="add(this)"
                                 id="人体简史">加入购物车</button></center>
-                                <script>
-                                    localStorage.setItem("人体简史",20.00);
-                                </script>
+                        <script>
+                            sessionStorage.setItem("人体简史", 20.00);
+                        </script>
                     </center>
                 </td>
                 <td style="border:gray 1px solid;width:10%;">
@@ -264,9 +291,9 @@
                         <center>40.00元</center>
                         <center><button style="color: gray;height:auto;font-weight:400;" onclick="add(this)"
                                 id="乔布斯传">加入购物车</button></center>
-                                <script>
-                                    localStorage.setItem("乔布斯传",40.00);
-                                </script>
+                        <script>
+                            sessionStorage.setItem("乔布斯传", 40.00);
+                        </script>
                     </center>
                 </td>
                 <td style="border:gray 1px solid;width:10%;">
@@ -275,9 +302,9 @@
                         <center>25.00元</center>
                         <center><button style="color: gray;height:auto;font-weight:400;" onclick="add(this)"
                                 id="倾城之恋">加入购物车</button></center>
-                                <script>
-                                    localStorage.setItem("倾城之恋",25.99);
-                                </script>
+                        <script>
+                            sessionStorage.setItem("倾城之恋", 25.99);
+                        </script>
                     </center>
                 </td>
                 <td style="border:gray 1px solid;width:10%;">
@@ -286,9 +313,9 @@
                         <center>29.99元</center>
                         <center><button style="color: gray;height:auto;font-weight:400;" onclick="add(this)"
                                 id="如何才能不焦虑">加入购物车</button></center>
-                                <script>
-                                    localStorage.setItem("如何才能不焦虑",29.99);
-                                </script>
+                        <script>
+                            sessionStorage.setItem("如何才能不焦虑", 29.99);
+                        </script>
                     </center>
                 </td>
             </tr>
@@ -299,9 +326,9 @@
                         <center>32.00元</center>
                         <center><button style="color: gray;height:auto;font-weight:400;" onclick="add(this)"
                                 id="知更鸟">加入购物车</button></center>
-                                <script>
-                                    localStorage.setItem("知更鸟",32.00);
-                                </script>
+                        <script>
+                            sessionStorage.setItem("知更鸟", 32.00);
+                        </script>
                     </center>
                 </td>
                 <td style="border:gray 1px solid;width:10%;">
@@ -310,9 +337,9 @@
                         <center>128.00元</center>
                         <center><button style="color: gray;height:auto;font-weight:400;" onclick="add(this)"
                                 id="时间简史">加入购物车</button></center>
-                                <script>
-                                    localStorage.setItem("时间简史",128.00);
-                                </script>
+                        <script>
+                            sessionStorage.setItem("时间简史", 128.00);
+                        </script>
                     </center>
                 </td>
                 <td style="border:gray 1px solid;width:10%;">
@@ -321,9 +348,9 @@
                         <center>28.00元</center>
                         <center><button style="color: gray;height:auto;font-weight:400;" onclick="add(this)"
                                 id="山海经">加入购物车</button></center>
-                                <script>
-                                    localStorage.setItem("山海经",28.00);
-                                </script>
+                        <script>
+                            sessionStorage.setItem("山海经", 28.00);
+                        </script>
                     </center>
                 </td>
                 <td style="border:gray 1px solid;width:10%;">
@@ -332,14 +359,15 @@
                         <center>56.00元</center>
                         <center><button style="color: gray;height:auto;font-weight:400;" onclick="add(this)"
                                 id="大话设计模式">加入购物车</button></center>
-                                <script>
-                                    localStorage.setItem("大话设计模式",56.00);
-                                </script>
+                        <script>
+                            sessionStorage.setItem("大话设计模式", 56.00);
+                        </script>
                     </center>
                 </td>
             </tr>
         </table>
     </div>
+    
 
 </body>
 
