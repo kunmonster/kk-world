@@ -6,97 +6,122 @@
 
 using namespace std;
 
+#define INT_MAX 2147483647
+
 class Caculator {
  private:
  public:
   int priority(char c) {
     switch (c) {
       case '+':
-        return 1;
+        return 2;
       case '-':
-        return 1;
+        return 2;
       case '*':
-        return 2;
+        return 3;
       case '/':
-        return 2;
+        return 3;
+      case ')':
+        return 1;
+      case '(':
+        return 4;
       default:
         return 0;
     }
   }
-  int Reverse(string s) {
-    vector<char> value;
+ long Reverse(string s) {
+    stack<int> value;
     stack<char> oper;
     int length = s.length();
-    for (int i=0;i<length;i++) {
+    for (int i = 0; i < length; i++) {
       if (s[i] == ' ')
         continue;
       else if (isdigit(s[i])) {
         int sum = 0;
-        while(isdigit(s[i])){
-          sum = sum*10+(s[i]-'0');
-          i++;
+        while (isdigit(s[i])) {
+          sum = sum * 10 + (s[i] - '0');
+          ++i;
         }
-        value.push_back(sum);
+        i -= 1;
+        value.push(sum);
       } else {
-        if (oper.empty()) {
-          oper.push(s[i]);
-        } else {
-          while (!oper.empty() && (priority(oper.top()) >= priority(s[i]))) {
-            value.push_back(oper.top());
-            oper.pop();
+        while (!oper.empty() &&
+               this->priority(oper.top()) >= this->priority(s[i]) &&
+               oper.top() != '(') {
+          int a, b = 0;
+          char sign = oper.top();
+          if (!value.empty()) {
+            b = value.top();
+            value.pop();
           }
+          if (!value.empty()) {
+            a = value.top();
+            value.pop();
+          }
+          switch (sign) {
+            case '+':
+              a += b;
+              break;
+            case '-':
+              a = a - b;
+              break;
+            case '*':
+              a *= b;
+              break;
+            case '/':
+              a = a / b;
+              break;
+            default:
+              break;
+          }
+          value.push(a);
+          oper.pop();
+        }
+        if (s[i] == ')') {
+          oper.pop();
+        } else {
           oper.push(s[i]);
         }
       }
-      cout<<value[i];
     }
     while (!oper.empty()) {
-      
-      value.push_back(oper.top());
-      oper.pop();
-    }
-
-    //计算
-    stack<int> result;
-    int length_num = value.size();
-    for (int i = 0; i < length_num; i++) {
-      if (isdigit(value[i])) {
-        result.push(value[i] - '0');
-      } else {
-        int a,b=0;
-        if(!result.empty())
-           a = result.top();
-          result.pop();
-        if(!result.empty())  
-           b = result.top();
-          result.pop();
-        switch (value[i]) {
-          case '+':
-            a += b;
-            break;
-          case '-':
-            a = b - a;
-            break;
-          case '*':
-            a *= b;
-            break;
-          case '/':
-            a = b / a;
-            break;
-          default:
-            break;
-        }
-        result.push(a);
+      long a, b = 0;
+      char sign = oper.top();
+      if (!value.empty()) {
+        b = value.top();
+        value.pop();
       }
+      if (!value.empty()) {
+        a = value.top();
+        value.pop();
+      }
+     
+      switch (sign) {
+        case '+':
+          a += b;
+          break;
+        case '-':
+          a = a - b;
+          break;
+        case '*':
+          a *= b;
+          break;
+        case '/':
+          a = a / b;
+          break;
+        default:
+          break;
+      }
+      oper.pop();
+      value.push(a);
     }
-  
-  return result.top();
+    return value.top();
   }
 };
 int main() {
-  string m = "256+32*2";
+  string m = "1*2-3/4+5*6-7*8+9/10";
   Caculator *A = new Caculator();
-  auto res = A->Reverse(m);
+  int res = A->Reverse(m);
 
   system("pause");
   return 0;

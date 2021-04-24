@@ -198,7 +198,7 @@ void Draw() {
        << endl;
   cout << "    1.创建进程                        2.正在运行的进程" << endl
        << endl;
-  cout << "    3.换出进程                        4.杀死进程" << endl << endl;
+  cout << "    3.换出进程                        4.杀死进程" << endl <<  endl;
   cout << "    5.唤醒进程                        6.退出程序" << endl
        << endl
        << endl;
