@@ -17,7 +17,7 @@ class PCB {
   string process_ID_ex;  //外部ID
   int process_ID_in;     //内部ID
   int status;            //进程状态
-  int Priority;          //进程优先级
+  int Priority;          //进程优先级(值越小优先级越高)
   int size;              //进程所需的时间
   int content[10];       //进程内容
  public:
@@ -69,6 +69,7 @@ class PCB {
   }
 };
 
+
 vector<PCB*> Memory;      //模拟内存
 queue<PCB*> Block_Queen;  //阻塞队列
 
@@ -112,7 +113,7 @@ void showProcess() {
     for (auto process : Memory) {
       cout << setw(10) << right << process->getexID() << "\t" << setw(10)
            << right << process->getinID() << "\t" << setw(8) << right
-           << process->getstatu(process->getStatus())<< endl;
+           << process->getstatu(process->getStatus()) << endl;
     }
   }
 }
@@ -158,7 +159,7 @@ void swap_out() {
         Memory[i]->changeStatus(Block);
         Block_Queen.push(Memory[i]);  //换出为阻塞状态,进入阻塞队列中
         Memory.erase(Memory.begin() + i);
-        cout<<"换出成功该进程已进入阻塞队列";
+        cout << "换出成功该进程已进入阻塞队列";
         break;
       } else {
         cout << "当前内存中不存在该进程" << endl << endl;
@@ -198,7 +199,7 @@ void Draw() {
        << endl;
   cout << "    1.创建进程                        2.正在运行的进程" << endl
        << endl;
-  cout << "    3.换出进程                        4.杀死进程" << endl <<  endl;
+  cout << "    3.换出进程                        4.杀死进程" << endl << endl;
   cout << "    5.唤醒进程                        6.退出程序" << endl
        << endl
        << endl;
