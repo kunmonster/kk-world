@@ -1,3 +1,9 @@
+/***
+ * author:fkj
+ * date:2021.05.11
+ * operatingSystem lab  3----pageManage
+ **/
+
 #include <algorithm>
 #include <iostream>
 #include <map>
@@ -111,7 +117,7 @@ class FIFO {
  public:
   FIFO(std::vector<int> AllPage, int size) {
     this->AllPage = AllPage;
-    this->size = size; 
+    this->size = size;
     while (!this->AllPage.empty()) {
       int allsize = this->AllPage.size();
       bool tag = false;  //在当前物理块中是否存在的标志
